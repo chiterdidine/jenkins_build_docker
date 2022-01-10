@@ -1,0 +1,26 @@
+node{
+def registryProject='registry.gitlab.com/chiterdidine/projet1.git'
+
+def IMAGE="${registryProject}:version-${env.BUILD_id}"
+echo "IMAGE = $IMAGE"
+
+
+stage ('Clone') {
+checkout scm
+}
+def img = stage('Build') {
+docker.build("$image", '.')
+}
+stage('Run') { 
+img.withRun("--name run-$BUILD_ID -p 90:90') { c->
+sh 'curl localhost'
+}
+stage('Push') { 
+docker.withRegistry('https://registry.gitlab.com'){
+img.push 'latest'
+img.push()
+}
+}
+}
+}
+
