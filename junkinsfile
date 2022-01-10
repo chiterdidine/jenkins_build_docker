@@ -12,7 +12,7 @@ sh 'docker ps'
 sh 'curl localhost'
 }
 stage('Push') { 
-docker.withRegistry('https://github.com/chiterdidine/jenkins_build_docker.git'){
+docker.withRegistry('https://registry.gitlab.com'){
 img.push 'latest'
 img.push()
 }
