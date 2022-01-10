@@ -10,7 +10,7 @@ stage ('Clone') {
 checkout scm
 }
 def img = stage('Build') {
-docker.build("$image", '.')
+docker.build("$IMAGE", '.')
 }
 stage('Run') { 
 img.withRun("--name run-$BUILD_ID -p 90:90") { c->
