@@ -1,3 +1,4 @@
+def pipelineContext = [:] 
 node{
 def registryProject='registry.gitlab.com/chiterdidine/projet1.git'
 
